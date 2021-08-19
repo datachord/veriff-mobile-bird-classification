@@ -23,7 +23,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Disable Tensorflow logging
 def classifier_offline():
     return BirdClassifier(online=False)
 
-local_dir = "file:///work/veriff-mobile-bird-classification"  # repository directory – change /kaggle/working to suit local file system
+local_dir = "file:///root/veriff-mobile-bird-classification"  # repository directory – change /kaggle/working to suit local file system
 @pytest.mark.parametrize('url', [
     f"{local_dir}/images/Phalacrocorax varius varius.jpg",
     f"{local_dir}/images/Galerida cristata.jpg",
