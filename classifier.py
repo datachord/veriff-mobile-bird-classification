@@ -10,6 +10,7 @@ import numpy as np
 import time
 import pytest
 import numpy.testing as npt
+import flask
 
 # Getting some unknown linter errors, disable everything to get this to production asap
 # pylint: disable-all
@@ -23,6 +24,8 @@ image_urls = [
     'https://i.pinimg.com/originals/f3/fb/92/f3fb92afce5ddff09a7370d90d021225.jpg',
     'https://cdn.britannica.com/77/189277-004-0A3BC3D4.jpg'
 ]
+
+app = flask.Flask(__name__)
 
 
 class BirdClassifier:
@@ -78,15 +81,16 @@ class BirdClassifier:
         
         return top_names, top_scores
     
-
-if __name__ == "__main__":
-    start_time = time.time()
+@app.route("/predict", methods=["POST"])
+def predict():
     clf = BirdClassifier()
+    predictions = []
     for i, url in enumerate(image_urls):
         top_names, top_scores = clf.identify(url)
-        # Print results to kubernetes log
-        print(f'Run: {i + 1}')
-        print(f'Top match: {top_names[0]} with score: {top_scores[0]}')
-        print(f'Second match: {top_names[1]} with score: {top_scores[1]}')
-        print(f'Third match: {top_names[2]} with score: {top_scores[2]}\n')
-    print(f'Time spent: {time.time() - start_time}')
+        predictions.append((top_names[0], top_scores[0]))
+    
+    return predictions
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
