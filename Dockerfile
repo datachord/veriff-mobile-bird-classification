@@ -16,6 +16,7 @@ RUN apt-get update && \
     pip install matplotlib==3.3.4 && \
     pip install ipytest==0.11.0 && \
     pip install pytest==6.2.4 && \
+    pip install Flask==2.0.1 && \
     apt-get install -y openssh-client && \
     apt-get install -y git && \
     apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* && rm -rf /root/.cache/pip/* && rm -rf /usr/local/src/*
