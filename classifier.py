@@ -92,13 +92,13 @@ class BirdClassifier:
 def predict():
     if flask.request.method == "POST":
         if "image" not in flask.request.files:
-            return ()
+            return ""
     
         # predict bird kind
         clf = BirdClassifier()
         top_names, top_scores = clf.identify(flask.request.files["image"])
         
-    return tuple(zip(top_names[:3], top_scores[:3]))
+    return str(list(zip(top_names[:3], top_scores[:3])))
 
 
 if __name__ == "__main__":
