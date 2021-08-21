@@ -90,7 +90,7 @@ class BirdClassifier:
 @app.route("/predict", methods=["POST", "GET"])
 def predict():
     if flask.request.method == "POST":
-		if "image" not in flask.request.files:
+        if "image" not in flask.request.files:
             return ()
     
         # predict bird kind
