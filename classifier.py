@@ -89,13 +89,15 @@ class BirdClassifier:
     
 @app.route("/predict", methods=["POST", "GET"])
 def predict():
-    clf = BirdClassifier()
-    predictions = []
-    for i, url in enumerate(image_urls):
-        top_names, top_scores = clf.identify(url)
-        predictions.append((top_names[0], top_scores[0]))
+    if flask.request.method == "POST":
+		if "image" not in flask.request.files:
+            return ()
     
-    return str(predictions)
+        # predict bird kind
+        clf = BirdClassifier()
+        top_names, top_scores = clf.identify(flask.request.files["image"])
+        
+    return tuple(zip(top_names[:3], top_scores[:3]))
 
 
 if __name__ == "__main__":
