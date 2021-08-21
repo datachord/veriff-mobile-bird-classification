@@ -3,6 +3,7 @@
 import os
 import tensorflow.compat.v2 as tf
 import tensorflow_hub as hub
+import io
 import cv2
 import urllib.request
 import pandas as pd
@@ -50,11 +51,16 @@ class BirdClassifier:
     def load_image(url):
         """
         Read image url into array (224, 224)
+        url: file object/url/local file
         """
         
         # Loading images
-        image_get_response = urllib.request.urlopen(url)
-        image_array = np.asarray(bytearray(image_get_response.read()), dtype=np.uint8)
+        # url can be file object, url or points to local file
+        if isinstance(url, io.IOBase):
+            response = url
+        else:
+            response = urllib.request.urlopen(url)
+        image_array = np.asarray(bytearray(response.read()), dtype=np.uint8)
 
         # Changing images
         image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
