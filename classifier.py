@@ -98,7 +98,7 @@ def predict():
         clf = BirdClassifier()
         top_names, top_scores = clf.identify(flask.request.files["image"])
         
-    return str(list(zip(top_names[:3], top_scores[:3]))) + str(type(flask.request.files["image"]))
+    return str(list(zip(top_names[:3], top_scores[:3])))
 
 
 if __name__ == "__main__":
