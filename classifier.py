@@ -81,7 +81,7 @@ class BirdClassifier:
         
         return top_names, top_scores
     
-@app.route("/predict", methods=["POST", "GET"])
+# @app.route("/predict", methods=["POST", "GET"])
 def predict():
     clf = BirdClassifier()
     predictions = []
@@ -89,8 +89,9 @@ def predict():
         top_names, top_scores = clf.identify(url)
         predictions.append((top_names[0], top_scores[0]))
     
-    return predictions
+    return str(predictions)
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    predict()
+    # app.run(debug=True, host='0.0.0.0')
