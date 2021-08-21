@@ -41,3 +41,4 @@ FROM packages
 # copy app
 COPY --from=app /veriff-mobile-bird-classification /root/veriff-mobile-bird-classification
 WORKDIR /root/veriff-mobile-bird-classification
+CMD ["python", "classifier.py"]
