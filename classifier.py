@@ -4,6 +4,7 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_hub as hub
 import io
+from werkzeug.datastructures import FileStorage
 import cv2
 import urllib.request
 import pandas as pd
@@ -54,13 +55,12 @@ class BirdClassifier:
         url: file object/url/local file
         """
         
-        # # Loading images
-        # # url can be file object, url or points to local file
-        # if isinstance(url, io.IOBase):
-        #     response = url
-        # else:
-        #     response = urllib.request.urlopen(url)
-        response = url
+        # Loading images
+        # url can be file object, url or points to local file
+        if isinstance(url, io.IOBase, FileStorage):
+            response = url
+        else:
+            response = urllib.request.urlopen(url)
         image_array = np.asarray(bytearray(response.read()), dtype=np.uint8)
 
         # Changing images
