@@ -54,12 +54,13 @@ class BirdClassifier:
         url: file object/url/local file
         """
         
-        # Loading images
-        # url can be file object, url or points to local file
-        if isinstance(url, io.IOBase):
-            response = url
-        else:
-            response = urllib.request.urlopen(url)
+        # # Loading images
+        # # url can be file object, url or points to local file
+        # if isinstance(url, io.IOBase):
+        #     response = url
+        # else:
+        #     response = urllib.request.urlopen(url)
+        response = url
         image_array = np.asarray(bytearray(response.read()), dtype=np.uint8)
 
         # Changing images
