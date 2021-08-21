@@ -81,7 +81,7 @@ class BirdClassifier:
         
         return top_names, top_scores
     
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST", "GET"])
 def predict():
     clf = BirdClassifier()
     predictions = []
