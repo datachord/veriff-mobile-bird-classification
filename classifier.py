@@ -57,7 +57,7 @@ class BirdClassifier:
         
         # Loading images
         # url can be file object, url or points to local file
-        if isinstance(url, io.IOBase, FileStorage):
+        if isinstance(url, (io.IOBase, FileStorage)):
             response = url
         else:
             response = urllib.request.urlopen(url)
