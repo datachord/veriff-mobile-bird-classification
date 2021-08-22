@@ -3,3 +3,4 @@ tensorflow_hub==0.11.0
 opencv-python==4.5.1.48
 numpy==1.19.3
 ipytest==0.11.0  # for prototyping
+Flask==2.0.1
